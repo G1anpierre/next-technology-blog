@@ -1,6 +1,19 @@
 import Image from 'next/image'
 
-export default function Home() {
+const getPosts = async () => {
+  console.log('what is this : ', `${process.env.API_URL}/api/posts`)
+  try {
+    const res = await fetch(`${process.env.API_URL}/api/posts`)
+    return res.json()
+  } catch (e) {
+    console.log('e :', e)
+  }
+}
+
+export default async function Home() {
+  const data = await getPosts()
+  console.log('data :', data)
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
