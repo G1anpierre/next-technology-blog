@@ -1,7 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
+import {PostType} from '@/types'
 
-export const CardPost = () => {
+export const CardPost = ({
+  attributes: {title, author, slug, subtitle, categories},
+}: PostType) => {
   return (
     <>
       <div className="border rounded-xl overflow-hidden">
@@ -15,12 +18,12 @@ export const CardPost = () => {
       </div>
       <div className="xl:flex items-center">
         <div>
-          <a>Code Quality</a>
-          <h3>Title</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
-            harum quos totam error expedita, eius minima saepe dolores
-          </p>
+          {categories.data.map(({attributes}) => (
+            <a key={attributes.name}>{attributes.name}</a>
+          ))}
+          <h3>{title}</h3>
+          <p>{subtitle}</p>
+          <sub>{author}</sub>
         </div>
       </div>
     </>

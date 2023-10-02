@@ -39,7 +39,6 @@ export default async function Home() {
       },
     },
   })
-  console.log('data :', data.posts.data)
 
   return (
     <main>
