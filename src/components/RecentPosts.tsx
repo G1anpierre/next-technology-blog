@@ -44,14 +44,12 @@ export const RecentPosts = async () => {
   })
   const validatedRecentPosts = PostsSchema.parse(data.posts.data)
 
-  // const arrayOfSix = Array.from(Array(6).keys())
-
   return (
     <div className="py-8 container mx-auto p-2">
-      <h2 className="font-semibold text-2xl mb-8">Recent Posts</h2>
+      <h2 className="font-semibold text-4xl mb-8">Recent Posts</h2>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
         {validatedRecentPosts.map(post => (
-          <div key={post.attributes.title}>
+          <div key={post.attributes.title} className="grid gap-2">
             <CardPost {...post} />
           </div>
         ))}

@@ -19,11 +19,18 @@ export const CardPost = ({
       <div className="xl:flex items-center">
         <div>
           {categories.data.map(({attributes}) => (
-            <a key={attributes.name}>{attributes.name}</a>
+            <a
+              key={attributes.name}
+              className="uppercase text-indigo-500 font-medium"
+            >
+              {attributes.name}
+            </a>
           ))}
-          <h3>{title}</h3>
-          <p>{subtitle}</p>
-          <sub>{author}</sub>
+          <h3 className="font-bold underline underline-offset-4 decoration-indigo-500 decoration-2">
+            {title}
+          </h3>
+          <p className="font-semibold">{subtitle}</p>
+          <sub className="text-gray-500">Author: {author}</sub>
         </div>
       </div>
     </>

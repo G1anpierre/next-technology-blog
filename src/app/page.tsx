@@ -47,20 +47,6 @@ export default async function Home() {
       <FeaturePosts />
       <RecentPosts />
       <Footer />
-      {/* <ul>
-        {data.posts.data.map(post => (
-          <li key={post.attributes.slug}>
-            {post.attributes.title}
-            <ul>
-              {post.attributes.categories.data.map(category => (
-                <li className="text-sm text-color-green">
-                  {category.attributes.name}
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul> */}
     </main>
   )
 }

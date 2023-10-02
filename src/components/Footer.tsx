@@ -36,7 +36,7 @@ export const Footer = () => {
   ]
 
   return (
-    <footer className=" bg-gray-900 my-8">
+    <footer className=" bg-gray-900 mt-8">
       <div className="py-8 container mx-auto p-2">
         <nav>
           <ul role="list" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
