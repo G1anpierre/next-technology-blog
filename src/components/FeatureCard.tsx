@@ -20,7 +20,7 @@ export const FeatureCard = ({
             {categories.data.map(({attributes}) => (
               <a
                 key={attributes.name}
-                className="bg-black border-white border rounded-full py-2 px-4 self-start text-xs"
+                className="bg-black border-white border rounded-full py-2 px-4 self-start text-xs uppercase"
               >
                 {attributes.name}
               </a>
