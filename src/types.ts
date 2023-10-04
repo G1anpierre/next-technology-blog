@@ -10,12 +10,25 @@ const CategoriesSchema = z.object({
   ),
 })
 
+const ImageSchema = z.object({
+  data: z.object({
+    attributes: z.object({
+      url: z.string(),
+      caption: z.string(),
+      width: z.number(),
+      height: z.number(),
+      size: z.number(),
+    }),
+  }),
+})
+
 export const PostSchema = z.object({
   title: z.string(),
   author: z.string(),
   slug: z.string(),
   subtitle: z.string(),
   categories: CategoriesSchema,
+  image: z.any(),
 })
 
 const Attributes = z.object({

@@ -13,13 +13,24 @@ const query = gql`
           title
           author
           body
-          author
           subtitle
           slug
           categories {
             data {
               attributes {
                 name
+              }
+            }
+          }
+          image {
+            data {
+              attributes {
+                size
+                name
+                caption
+                height
+                width
+                url
               }
             }
           }
@@ -39,6 +50,8 @@ export const FeaturePosts = async () => {
       },
     },
   })
+
+  console.log('data.posts.data *', JSON.stringify(data.posts.data, null, 2))
   const validatedPosts = PostsSchema.parse(data.posts.data)
   const [featureCard, firstCardPost, secondCardPost] = validatedPosts
 
