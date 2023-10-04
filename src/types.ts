@@ -28,7 +28,7 @@ export const PostSchema = z.object({
   slug: z.string(),
   subtitle: z.string(),
   categories: CategoriesSchema,
-  image: z.any(),
+  image: ImageSchema,
 })
 
 const Attributes = z.object({

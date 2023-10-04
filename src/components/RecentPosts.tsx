@@ -15,6 +15,18 @@ const query = gql`
         attributes {
           title
           author
+          image {
+            data {
+              attributes {
+                size
+                name
+                caption
+                height
+                width
+                url
+              }
+            }
+          }
           body
           author
           subtitle
