@@ -42,11 +42,9 @@ export default async function Home() {
 
   return (
     <main>
-      <Header />
       <Hero />
       <FeaturePosts />
       <RecentPosts />
-      <Footer />
     </main>
   )
 }
