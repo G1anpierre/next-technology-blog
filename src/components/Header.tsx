@@ -4,6 +4,7 @@ import {gql} from '@apollo/client'
 import Link from 'next/link'
 import {MobileMenu} from './MobileMenu'
 import Image from 'next/image'
+import {HeaderSchema} from '@/types'
 
 const query = gql`
   query {
@@ -33,8 +34,7 @@ export const Header = async () => {
     },
   })
 
-  const {tabs} = data.homepage.data.attributes.header
-
+  const {tabs} = HeaderSchema.parse(data.homepage.data.attributes.header)
   return (
     <header className="absolute inset-x-0 top-0 z-50">
       <nav

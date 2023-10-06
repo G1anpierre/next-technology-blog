@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import {getClient} from '@/lib/client'
 import {gql} from '@apollo/client'
+import {HeroSchema} from '@/types'
 
 const query = gql`
   query {
@@ -19,6 +20,9 @@ const query = gql`
               data {
                 attributes {
                   url
+                  width
+                  height
+                  size
                 }
               }
             }
@@ -40,18 +44,18 @@ export const Hero = async () => {
     },
   })
 
-  const {hero} = data.homepage.data.attributes
+  const {title, image, description, button} = HeroSchema.parse(
+    data.homepage.data.attributes.hero,
+  )
 
   return (
     <div className="relative isolate overflow-hidden pt-14 mb-2">
       <Image
-        src={
-          hero.image.data.attributes.url ?? 'https://picsum.photos/2830/1000'
-        }
+        src={image.data.attributes.url ?? 'https://picsum.photos/2830/1000'}
         alt="image background"
         className="absolute inset-0 -z-10 h-full w-full object-cover brightness-50"
-        width={2830}
-        height={1000}
+        width={image.data.attributes.width}
+        height={image.data.attributes.height}
       />
       <div
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -68,17 +72,15 @@ export const Hero = async () => {
       <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
         <div className="text-center">
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            {hero.title}
+            {title}
           </h1>
-          <p className="mt-6 text-lg leading-8 text-gray-300">
-            {hero.description}
-          </p>
+          <p className="mt-6 text-lg leading-8 text-gray-300">{description}</p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a
               href="#"
               className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
             >
-              {hero.button.label}
+              {button.label}
             </a>
           </div>
         </div>

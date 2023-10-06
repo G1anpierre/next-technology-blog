@@ -14,7 +14,7 @@ const ImageSchema = z.object({
   data: z.object({
     attributes: z.object({
       url: z.string(),
-      caption: z.string(),
+      caption: z.string().optional(),
       width: z.number(),
       height: z.number(),
       size: z.number(),
@@ -33,6 +33,37 @@ export const PostSchema = z.object({
 
 const Attributes = z.object({
   attributes: PostSchema,
+})
+
+export const LinkSchema = z.object({
+  id: z.string().optional(),
+  label: z.string(),
+  href: z.string(),
+})
+
+export const HeaderSchema = z.object({
+  tabs: z.array(LinkSchema),
+})
+
+export const HeroSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  button: LinkSchema,
+  image: ImageSchema,
+})
+
+export const FooterSchema = z.object({
+  newsletter: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
+  sections: z.array(
+    z.object({
+      id: z.string(),
+      title: z.string(),
+      links: z.array(LinkSchema),
+    }),
+  ),
 })
 
 export const PostsSchema = z.array(Attributes)

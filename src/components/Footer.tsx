@@ -3,6 +3,7 @@ import React from 'react'
 import {socialMediaProfiles} from '@/components/SocialMedia'
 import {getClient} from '@/lib/client'
 import {gql} from '@apollo/client'
+import {FooterSchema} from '@/types'
 
 export const Footer = async () => {
   // const navigation = [
@@ -73,7 +74,9 @@ export const Footer = async () => {
     },
   })
 
-  const {sections, newsletter} = data.homepage.data.attributes.footer
+  const {sections, newsletter} = FooterSchema.parse(
+    data.homepage.data.attributes.footer,
+  )
 
   return (
     <footer className=" bg-gray-900 mt-8">

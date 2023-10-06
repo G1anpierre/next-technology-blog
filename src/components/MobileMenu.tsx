@@ -4,6 +4,7 @@ import {useState} from 'react'
 import {Dialog} from '@headlessui/react'
 import {XMarkIcon} from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const MobileMenu = ({tabs}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -20,10 +21,12 @@ export const MobileMenu = ({tabs}) => {
         <div className="flex items-center justify-between">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Dev Notebook</span>
-            <img
+            <Image
               className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-              alt=""
+              src="/dev-notebook-high-resolution-logo-color-on-transparent-background.png"
+              alt="Dev Logo"
+              width={200}
+              height={200}
             />
           </a>
           <button
