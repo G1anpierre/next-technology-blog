@@ -74,9 +74,15 @@ export const Footer = async () => {
     },
   })
 
-  const {sections, newsletter} = FooterSchema.parse(
+  const validatedFooter = FooterSchema.safeParse(
     data.homepage.data.attributes.footer,
   )
+
+  if (!validatedFooter.success) {
+    throw new Error('Failed to fetch Footer')
+  }
+
+  const {sections, newsletter} = validatedFooter.data
 
   return (
     <footer className=" bg-gray-900 mt-8">

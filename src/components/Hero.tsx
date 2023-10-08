@@ -44,9 +44,13 @@ export const Hero = async () => {
     },
   })
 
-  const {title, image, description, button} = HeroSchema.parse(
-    data.homepage.data.attributes.hero,
-  )
+  const validatedHero = HeroSchema.safeParse(data.homepage.data.attributes.hero)
+
+  if (!validatedHero.success) {
+    throw new Error('Failed to fetch Hero')
+  }
+
+  const {title, image, description, button} = validatedHero.data
 
   return (
     <div className="relative isolate overflow-hidden pt-14 mb-2">

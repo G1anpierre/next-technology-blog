@@ -5,8 +5,9 @@ import {Dialog} from '@headlessui/react'
 import {XMarkIcon} from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import Image from 'next/image'
+import {HeaderType} from '@/types'
 
-export const MobileMenu = ({tabs}) => {
+export const MobileMenu = ({tabs}: HeaderType) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -43,11 +44,11 @@ export const MobileMenu = ({tabs}) => {
             <div className="space-y-2 py-6">
               {tabs.map(item => (
                 <Link
-                  key={item.name}
+                  key={`${item.id}-${item.label}`}
                   href={item.href}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
                 >
-                  {item.name}
+                  {item.label}
                 </Link>
               ))}
             </div>

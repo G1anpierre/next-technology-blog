@@ -34,7 +34,16 @@ export const Header = async () => {
     },
   })
 
-  const {tabs} = HeaderSchema.parse(data.homepage.data.attributes.header)
+  const validatedHeader = HeaderSchema.safeParse(
+    data.homepage.data.attributes.header,
+  )
+
+  if (!validatedHeader.success) {
+    throw new Error('Failed to fetch Header')
+  }
+
+  const {tabs} = validatedHeader.data
+
   return (
     <header className="absolute inset-x-0 top-0 z-50">
       <nav

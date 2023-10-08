@@ -54,13 +54,17 @@ export const RecentPosts = async () => {
       },
     },
   })
-  const validatedRecentPosts = PostsSchema.parse(data.posts.data)
+  const validatedRecentPosts = PostsSchema.safeParse(data.posts.data)
+
+  if (!validatedRecentPosts.success) {
+    throw new Error('Failed to fetch Recent Posts')
+  }
 
   return (
     <div className="py-8 container mx-auto p-2">
       <h2 className="font-semibold text-4xl mb-8">Recent Posts</h2>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-        {validatedRecentPosts.map(post => (
+        {validatedRecentPosts.data.map(post => (
           <div key={post.attributes.title} className="grid gap-2">
             <CardPost {...post} />
           </div>

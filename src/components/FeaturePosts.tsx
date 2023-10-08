@@ -50,8 +50,13 @@ export const FeaturePosts = async () => {
     },
   })
 
-  const validatedPosts = PostsSchema.parse(data.posts.data)
-  const [featureCard, firstCardPost, secondCardPost] = validatedPosts
+  const validatedPosts = PostsSchema.safeParse(data.posts.data)
+
+  if (!validatedPosts.success) {
+    throw new Error('Failed to fetch posts')
+  }
+
+  const [featureCard, firstCardPost, secondCardPost] = validatedPosts.data
 
   return (
     <div className="py-8 container mx-auto p-2">

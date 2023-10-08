@@ -1,6 +1,4 @@
 import {FeaturePosts} from '@/components/FeaturePosts'
-import {Footer} from '@/components/Footer'
-import {Header} from '@/components/Header'
 import {Hero} from '@/components/Hero'
 import {RecentPosts} from '@/components/RecentPosts'
 import {getClient} from '@/lib/client'

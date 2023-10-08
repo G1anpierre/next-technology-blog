@@ -45,6 +45,8 @@ export const HeaderSchema = z.object({
   tabs: z.array(LinkSchema),
 })
 
+export type HeaderType = z.infer<typeof HeaderSchema>
+
 export const HeroSchema = z.object({
   title: z.string(),
   description: z.string(),
