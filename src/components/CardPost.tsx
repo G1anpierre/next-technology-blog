@@ -1,11 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
-import {PostType} from '@/types'
+import {AttributesType} from '@/types'
 import Link from 'next/link'
 
 export const CardPost = ({
   attributes: {title, author, slug, subtitle, categories, image},
-}: PostType) => {
+  id,
+}: AttributesType) => {
   return (
     <>
       <div className="grid grid-rows-[400px_150px] gap-2">
@@ -31,7 +32,7 @@ export const CardPost = ({
             <h3 className="font-bold underline underline-offset-4 decoration-indigo-500 decoration-2 mb-3">
               {title}
             </h3>
-            <Link href={`/blog/${slug}`}>
+            <Link href={`/blog/${slug}/${id}`}>
               <p className="font-semibold hover:underline hover:underline-offset-4 hover:decoration-indigo-500 text-ellipsis">
                 {subtitle}
               </p>

@@ -8,6 +8,7 @@ const query = gql`
   query {
     posts(filters: {featured: {eq: true}}) {
       data {
+        id
         attributes {
           title
           author
@@ -53,6 +54,7 @@ export const FeaturePosts = async () => {
   const validatedPosts = PostsSchema.safeParse(data.posts.data)
 
   if (!validatedPosts.success) {
+    console.log('error on FeaturePosts: ', validatedPosts.error)
     return null
   }
 

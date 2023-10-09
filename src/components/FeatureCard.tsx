@@ -1,11 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
-import {PostType} from '@/types'
+import {AttributesType} from '@/types'
 import Link from 'next/link'
 
 export const FeatureCard = ({
   attributes: {subtitle, categories, image},
-}: PostType) => {
+}: AttributesType) => {
   return (
     <div className="relative md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-1 xl:row-span-2 xl:col-end-2">
       <div className="absolute inset-0 border rounded-xl overflow-hidden">

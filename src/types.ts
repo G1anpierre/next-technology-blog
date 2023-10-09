@@ -27,12 +27,14 @@ export const PostSchema = z.object({
   author: z.string(),
   slug: z.string(),
   subtitle: z.string(),
+  body: z.string(),
   categories: CategoriesSchema,
   image: ImageSchema,
 })
 
 const Attributes = z.object({
   attributes: PostSchema,
+  id: z.string(),
 })
 
 export const LinkSchema = z.object({
@@ -70,4 +72,5 @@ export const FooterSchema = z.object({
 
 export const PostsSchema = z.array(Attributes)
 
-export type PostType = z.infer<typeof Attributes>
+export type PostType = z.infer<typeof PostSchema>
+export type AttributesType = z.infer<typeof Attributes>

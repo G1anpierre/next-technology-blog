@@ -12,6 +12,7 @@ const query = gql`
       pagination: {page: 1, pageSize: 6}
     ) {
       data {
+        id
         attributes {
           title
           author
@@ -57,6 +58,7 @@ export const RecentPosts = async () => {
   const validatedRecentPosts = PostsSchema.safeParse(data.posts.data)
 
   if (!validatedRecentPosts.success) {
+    console.log('error on RecentPosts: ', validatedRecentPosts.error)
     return null
   }
 
