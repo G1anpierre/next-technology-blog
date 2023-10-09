@@ -57,7 +57,7 @@ export const RecentPosts = async () => {
   const validatedRecentPosts = PostsSchema.safeParse(data.posts.data)
 
   if (!validatedRecentPosts.success) {
-    throw new Error('Failed to fetch Recent Posts')
+    return null
   }
 
   return (

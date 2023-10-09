@@ -53,7 +53,7 @@ export const FeaturePosts = async () => {
   const validatedPosts = PostsSchema.safeParse(data.posts.data)
 
   if (!validatedPosts.success) {
-    throw new Error('Failed to fetch posts')
+    return null
   }
 
   const [featureCard, firstCardPost, secondCardPost] = validatedPosts.data
