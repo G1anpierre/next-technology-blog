@@ -32,6 +32,7 @@ const query = gql`
               attributes {
                 name
               }
+              id
             }
           }
         }

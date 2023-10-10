@@ -1,13 +1,16 @@
 import {z} from 'zod'
 
-const CategoriesSchema = z.object({
-  data: z.array(
-    z.object({
-      attributes: z.object({
-        name: z.string(),
-      }),
+export const Categories = z.array(
+  z.object({
+    attributes: z.object({
+      name: z.string(),
     }),
-  ),
+    id: z.string(),
+  }),
+)
+
+export const CategoriesSchema = z.object({
+  data: Categories,
 })
 
 const ImageSchema = z.object({
