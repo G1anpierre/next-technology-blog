@@ -2,7 +2,8 @@ import React from 'react'
 import {getClient} from '@/lib/client'
 import {gql} from '@apollo/client'
 import Link from 'next/link'
-import {Categories, CategoriesSchema} from '@/types'
+import {Categories} from '@/types'
+import classNames from 'classnames'
 
 const queryCategories = gql`
   query {
@@ -17,7 +18,11 @@ const queryCategories = gql`
   }
 `
 
-export const CategoriesNavbar = async () => {
+export const CategoriesNavbar = async ({
+  categorySlug,
+}: {
+  categorySlug: string
+}) => {
   const client = getClient()
   const {data: dataCategories} = await client.query({
     query: queryCategories,
@@ -42,7 +47,12 @@ export const CategoriesNavbar = async () => {
       {validatedCategories.data.map(element => (
         <li
           key={element.id}
-          className="px-4 py-2 border-neutral-950 rounded-full border-2 hover:border-indigo-600 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+          className={classNames(
+            'px-4 py-2 border-neutral-950 rounded-full border-2 hover:border-indigo-600 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110',
+            {
+              'border-blue-500': categorySlug === element.attributes.name,
+            },
+          )}
         >
           <Link href={`/categories/${element.attributes.name}`}>
             {element.attributes.name.toUpperCase()}

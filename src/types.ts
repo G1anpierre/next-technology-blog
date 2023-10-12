@@ -73,6 +73,18 @@ export const FooterSchema = z.object({
   ),
 })
 
+export const SubscriptionSchema = z.object({
+  email: z.string().email(),
+  firstname: z.string().min(2).max(50),
+  lastname: z.string().min(2).max(50),
+})
+
+export const SubscriptionResponseSchema = z.object({
+  full_name: z.string(),
+  email_address: z.string().email(),
+  status: z.string(),
+})
+
 export const PostsSchema = z.array(Attributes)
 
 export type PostType = z.infer<typeof PostSchema>

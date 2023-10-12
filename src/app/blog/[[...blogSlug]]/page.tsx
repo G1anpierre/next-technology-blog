@@ -32,7 +32,7 @@ const query = gql`
 `
 
 const Blog = async ({params}: {params: any}) => {
-  const id = params.blogSlug[1]
+  const id = params?.blogSlug[1]
 
   const client = getClient()
   const {data} = await client.query({

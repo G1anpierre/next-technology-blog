@@ -81,7 +81,7 @@ const Categories = async ({params}: {params: {categorySlug: string}}) => {
   return (
     <div>
       <Banner info={info} />
-      <CategoriesNavbar />
+      <CategoriesNavbar categorySlug={params.categorySlug} />
       <div className="py-8 container mx-auto p-2">
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
           {validatedCategoriesPosts.success
