@@ -1,91 +1,49 @@
+'use client'
+import {createSubscription} from '@/actions/actions'
 import React from 'react'
-import mailchimp from '@mailchimp/mailchimp_marketing'
-import {SubscriptionResponseSchema, SubscriptionSchema} from '@/types'
 
 export const Subscribe = () => {
-  const createSubscription = async (formData: FormData) => {
-    'use server'
-    const API_KEY = process.env.MAILCHIMP_API_KEY
-    const API_SERVER = process.env.MAILCHIMP_API_SERVER
-    const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID
-
-    const email = formData.get('email-address')
-    const firstName = formData.get('first-name')
-    const lastName = formData.get('lastname-name')
-
-    const subscriptionDataValidated = SubscriptionSchema.safeParse({
-      email,
-      firstName,
-      lastName,
-    })
-
-    if (!subscriptionDataValidated.success) {
-      console.log(
-        'error on subscriptionDataValidated: ',
-        subscriptionDataValidated.error,
-      )
-      return null
-    }
-
-    const {
-      email: emailValidated,
-      firstname: firstNameValidated,
-      lastname: lastNameValidated,
-    } = subscriptionDataValidated.data
-
-    mailchimp.setConfig({
-      apiKey: API_KEY,
-      server: API_SERVER,
-    })
-
-    try {
-      const response = await mailchimp.lists.addListMember(
-        AUDIENCE_ID as string,
-        {
-          email_address: emailValidated,
-          status: 'subscribed',
-          merge_fields: {
-            FNAME: firstNameValidated,
-            LNAME: lastNameValidated,
-          },
-        },
-      )
-
-      const subscriptionSchema = SubscriptionResponseSchema.parse(response)
-
-      console.log(
-        `Successfully added contact as an audience member. The contact's id is ${subscriptionSchema.full_name}.`,
-      )
-    } catch (e) {
-      console.log('error :', e)
-    }
-  }
+  const formRef = React.useRef<HTMLFormElement>(null)
 
   return (
     <form
+      ref={formRef}
       className="mt-6 sm:flex lg:mt-0 flex flex-col sm:flex-row gap-2"
-      action={createSubscription}
+      action={async formData => {
+        formRef.current?.reset()
+        ;('use server')
+        const result = await createSubscription(formData)
+
+        // TODO Add confirmation message Toast
+        if (result?.error) {
+          console.log('error on createSubscription: ', result.error)
+          return
+        }
+        console.log('result on createSubscription: ', result)
+      }}
     >
-      <label htmlFor="first-name" className="sr-only">
+      <label htmlFor="firstname" className="sr-only">
         First name
       </label>
       <input
         type="text"
-        name="first-name"
-        id="first-name"
+        name="firstname"
+        id="firstname"
         autoComplete="given-name"
         placeholder="*Enter your first name"
+        required
         className="w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:w-56 sm:text-sm sm:leading-6"
       />
-      <label htmlFor="lastname-name" className="sr-only">
+      <label htmlFor="lastname" className="sr-only">
         lastname name
       </label>
       <input
         type="text"
-        name="lastname-name"
-        id="lastname-name"
+        name="lastname"
+        id="lastname"
         autoComplete="given-name"
         placeholder="*Enter your lastname name"
+        required
         className="w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:w-56 sm:text-sm sm:leading-6"
       />
       <label htmlFor="email-address" className="sr-only">
