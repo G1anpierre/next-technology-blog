@@ -1,6 +1,9 @@
 'use server'
 import {SubscriptionResponseSchema, SubscriptionSchema} from '@/types'
 import mailchimp from '@mailchimp/mailchimp_marketing'
+import {Resend} from 'resend'
+import {NextResponse} from 'next/server'
+import EmailTemplate from '@/components/EmailTemplate'
 
 export const createSubscription = async (formData: FormData) => {
   const API_KEY = process.env.MAILCHIMP_API_KEY
@@ -62,5 +65,36 @@ export const createSubscription = async (formData: FormData) => {
     return {
       error: e,
     }
+  }
+}
+
+export const sendEmail = async (formData: FormData) => {
+  const resend = new Resend(process.env.RESEND_API_KEY)
+
+  const firstName = formData.get('first-name') as string
+  const lastName = formData.get('last-name') as string
+  const email = formData.get('email') as string
+  const company = formData.get('company') as string
+  const phone = formData.get('phone') as string
+  const message = formData.get('message') as string
+
+  try {
+    const data = await resend.emails.send({
+      from: 'DevNotebook <onboarding@resend.dev>',
+      to: ['campeon161803@gmail.com'],
+      subject: 'Contact Form Submission',
+      react: EmailTemplate({
+        firstName,
+        lastName,
+        email,
+        company,
+        phone,
+        message,
+      }) as React.ReactElement,
+    })
+
+    return NextResponse.json(data)
+  } catch (error) {
+    return NextResponse.json({error})
   }
 }
