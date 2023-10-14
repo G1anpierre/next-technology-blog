@@ -65,9 +65,13 @@ export const createSubscription = async (formData: FormData) => {
     console.log(
       `Successfully added contact as an audience member. The contact's Name is ${subscriptionSchema.full_name}.`,
     )
-  } catch (e) {
-    console.log('error :', e)
     return {
+      success: true,
+      data: subscriptionSchema,
+    }
+  } catch (e) {
+    return {
+      success: false,
       error: e,
     }
   }
