@@ -111,7 +111,7 @@ export const Footer = async () => {
             ))}
           </ul>
         </nav>
-        <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24 ">
+        <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24 lg:flex flex-col ">
           <div>
             <h3 className="text-sm font-semibold leading-6 text-white">
               {newsletter.title}

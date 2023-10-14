@@ -7,7 +7,6 @@ import {
 } from '@/types'
 import mailchimp from '@mailchimp/mailchimp_marketing'
 import {Resend} from 'resend'
-import {NextResponse} from 'next/server'
 import EmailTemplate from '@/components/EmailTemplate'
 
 export const createSubscription = async (formData: FormData) => {
