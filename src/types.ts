@@ -85,6 +85,17 @@ export const SubscriptionResponseSchema = z.object({
   status: z.string(),
 })
 
+export const SendEmailSchema = z.object({
+  firstName: z.string().min(2).max(50),
+  lastName: z.string().min(2).max(50),
+  email: z.string().email(),
+  company: z.string().min(2).max(50),
+  phone: z.string().optional(),
+  message: z.string().min(2).max(500),
+})
+
+export type SendEmailType = z.infer<typeof SendEmailSchema>
+
 export const PostsSchema = z.array(Attributes)
 
 export type PostType = z.infer<typeof PostSchema>

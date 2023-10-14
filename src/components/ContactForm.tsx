@@ -1,41 +1,89 @@
-import {sendEmail} from '@/actions/actions'
+'use client'
 import React from 'react'
+import {useFormik} from 'formik'
+import {toFormikValidationSchema} from 'zod-formik-adapter'
+import {SendEmailSchema} from '@/types'
+import classNames from 'classnames'
+import {toast} from 'react-toastify'
+import {sendeEmailToServer} from '@/utils/api'
 
 export const ContactForm = () => {
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      company: '',
+      phone: '',
+      message: '',
+    },
+    validationSchema: toFormikValidationSchema(SendEmailSchema),
+    onSubmit: async values => {
+      const result = await sendeEmailToServer(values)
+      if (result.id) {
+        toast.success('Email successfully sent')
+        return
+      } else {
+        toast.error('Error sending email')
+        return
+      }
+    },
+  })
+
   return (
-    <form action={sendEmail} className="mt-16">
+    <form onSubmit={formik.handleSubmit} className="mt-16">
       <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
         <div>
           <label
-            htmlFor="first-name"
+            htmlFor="firstName"
             className="block text-sm font-semibold leading-6 text-gray-900"
           >
-            First name
+            First name <span className="text-red-500">*</span>
+            {formik.touched.firstName && formik.errors.firstName ? (
+              <span className="text-xs text-red-500">
+                {formik.errors.firstName}
+              </span>
+            ) : null}
           </label>
           <div className="mt-2.5">
             <input
               type="text"
-              name="first-name"
-              id="first-name"
+              id="firstName"
               autoComplete="given-name"
-              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className={classNames(
+                'block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
+                {
+                  'ring-red-500': formik.errors.firstName,
+                },
+              )}
+              {...formik.getFieldProps('firstName')}
             />
           </div>
         </div>
         <div>
           <label
-            htmlFor="last-name"
+            htmlFor="lastName"
             className="block text-sm font-semibold leading-6 text-gray-900"
           >
-            Last name
+            Last name <span className="text-red-500">*</span>
+            {formik.touched.lastName && formik.errors.lastName ? (
+              <span className="text-xs text-red-500">
+                {formik.errors.lastName}
+              </span>
+            ) : null}
           </label>
           <div className="mt-2.5">
             <input
               type="text"
-              name="last-name"
-              id="last-name"
+              id="lastName"
               autoComplete="family-name"
-              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className={classNames(
+                'block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
+                {
+                  'ring-red-500': formik.errors.lastName,
+                },
+              )}
+              {...formik.getFieldProps('lastName')}
             />
           </div>
         </div>
@@ -44,15 +92,25 @@ export const ContactForm = () => {
             htmlFor="email"
             className="block text-sm font-semibold leading-6 text-gray-900"
           >
-            Email
+            Email <span className="text-red-500">*</span>
+            {formik.touched.email && formik.errors.email ? (
+              <span className="text-xs text-red-500">
+                {formik.errors.email}
+              </span>
+            ) : null}
           </label>
           <div className="mt-2.5">
             <input
               id="email"
-              name="email"
               type="email"
               autoComplete="email"
-              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className={classNames(
+                'block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
+                {
+                  'ring-red-500': formik.errors.email,
+                },
+              )}
+              {...formik.getFieldProps('email')}
             />
           </div>
         </div>
@@ -61,15 +119,25 @@ export const ContactForm = () => {
             htmlFor="company"
             className="block text-sm font-semibold leading-6 text-gray-900"
           >
-            Company
+            Company <span className="text-red-500">*</span>
+            {formik.touched.company && formik.errors.company ? (
+              <span className="text-xs text-red-500">
+                {formik.errors.company}
+              </span>
+            ) : null}
           </label>
           <div className="mt-2.5">
             <input
               type="text"
-              name="company"
               id="company"
               autoComplete="organization"
-              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className={classNames(
+                'block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
+                {
+                  'ring-red-500': formik.errors.company,
+                },
+              )}
+              {...formik.getFieldProps('company')}
             />
           </div>
         </div>
@@ -88,11 +156,11 @@ export const ContactForm = () => {
           <div className="mt-2.5">
             <input
               type="tel"
-              name="phone"
               id="phone"
               autoComplete="tel"
               aria-describedby="phone-description"
               className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              {...formik.getFieldProps('phone')}
             />
           </div>
         </div>
@@ -102,7 +170,12 @@ export const ContactForm = () => {
               htmlFor="message"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
-              How can we help you?
+              How can we help you? <span className="text-red-500">*</span>
+              {formik.touched.message && formik.errors.message ? (
+                <span className="text-xs text-red-500">
+                  {formik.errors.message}
+                </span>
+              ) : null}
             </label>
             <p id="message-description" className="text-gray-400">
               Max 500 characters
@@ -111,11 +184,15 @@ export const ContactForm = () => {
           <div className="mt-2.5">
             <textarea
               id="message"
-              name="message"
               rows={4}
               aria-describedby="message-description"
-              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              defaultValue={''}
+              className={classNames(
+                'block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
+                {
+                  'ring-red-500': formik.errors.message,
+                },
+              )}
+              {...formik.getFieldProps('message')}
             />
           </div>
         </div>

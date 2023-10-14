@@ -1,5 +1,10 @@
 'use server'
-import {SubscriptionResponseSchema, SubscriptionSchema} from '@/types'
+import {
+  SendEmailSchema,
+  SendEmailType,
+  SubscriptionResponseSchema,
+  SubscriptionSchema,
+} from '@/types'
 import mailchimp from '@mailchimp/mailchimp_marketing'
 import {Resend} from 'resend'
 import {NextResponse} from 'next/server'
@@ -68,33 +73,42 @@ export const createSubscription = async (formData: FormData) => {
   }
 }
 
-export const sendEmail = async (formData: FormData) => {
+export const sendEmail = async (formData: SendEmailType) => {
+  console.log('formData: ', formData)
   const resend = new Resend(process.env.RESEND_API_KEY)
 
-  const firstName = formData.get('first-name') as string
-  const lastName = formData.get('last-name') as string
-  const email = formData.get('email') as string
-  const company = formData.get('company') as string
-  const phone = formData.get('phone') as string
-  const message = formData.get('message') as string
+  const validatedData = SendEmailSchema.safeParse(formData)
+  console.log('validatedData :', validatedData)
 
-  try {
-    const data = await resend.emails.send({
-      from: 'DevNotebook <onboarding@resend.dev>',
-      to: ['campeon161803@gmail.com'],
-      subject: 'Contact Form Submission',
-      react: EmailTemplate({
-        firstName,
-        lastName,
-        email,
-        company,
-        phone,
-        message,
-      }) as React.ReactElement,
-    })
+  if (validatedData.success) {
+    const {
+      firstName,
+      lastName,
+      email,
+      company,
+      phone = '',
+      message,
+    } = validatedData.data
+    try {
+      const data = await resend.emails.send({
+        from: 'DevNotebook <onboarding@resend.dev>',
+        to: ['fgianpierre@gmail.com'],
+        subject: 'Contact Form Submission',
+        react: EmailTemplate({
+          firstName,
+          lastName,
+          email,
+          company,
+          phone,
+          message,
+        }) as React.ReactElement,
+      })
 
-    return NextResponse.json(data)
-  } catch (error) {
-    return NextResponse.json({error})
+      return {success: true, data}
+    } catch (error) {
+      return {success: false, error}
+    }
+  } else {
+    return {success: false, error: validatedData.error}
   }
 }

@@ -12,12 +12,19 @@ interface EmailTemplateProps {
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   firstName,
   lastName,
+  email,
+  company,
+  phone,
+  message,
 }) => (
   <div>
     <h1>
-      Notification, {firstName}, {lastName}!
+      Notification from, {firstName}, {lastName}!
     </h1>
-    <p></p>
+    <p>{email}</p>
+    <p>{company}</p>
+    <p>{phone}</p>
+    <p>{message}</p>
   </div>
 )
 
