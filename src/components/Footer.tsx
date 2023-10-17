@@ -5,6 +5,7 @@ import {getClient} from '@/lib/client'
 import {gql} from '@apollo/client'
 import {FooterSchema} from '@/types'
 import {Subscribe} from './Subscribe'
+import {Logo} from './Logo'
 
 export const Footer = async () => {
   // const navigation = [
@@ -111,7 +112,7 @@ export const Footer = async () => {
             ))}
           </ul>
         </nav>
-        <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24 lg:flex flex-col ">
+        <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24 flex flex-col gap-2 md:flex-row md:justify-between">
           <div>
             <h3 className="text-sm font-semibold leading-6 text-white">
               {newsletter.title}
@@ -120,8 +121,11 @@ export const Footer = async () => {
               {newsletter.description}
             </p>
           </div>
-          <Subscribe />
+          <div>
+            <Logo />
+          </div>
         </div>
+        <Subscribe />
       </div>
     </footer>
   )

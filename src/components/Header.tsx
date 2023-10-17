@@ -3,8 +3,8 @@ import {getClient} from '@/lib/client'
 import {gql} from '@apollo/client'
 import Link from 'next/link'
 import {MobileMenu} from './MobileMenu'
-import Image from 'next/image'
 import {HeaderSchema} from '@/types'
+import {Logo} from './Logo'
 
 const query = gql`
   query {
@@ -52,14 +52,7 @@ export const Header = async () => {
       >
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Dev Notebook</span>
-            <Image
-              className="h-8 w-auto"
-              src="/dev-notebook-high-resolution-logo-color-on-transparent-background.png"
-              alt="Dev Logo"
-              width={200}
-              height={200}
-            />
+            <Logo />
           </Link>
         </div>
         <div className="flex lg:hidden">
