@@ -100,7 +100,7 @@ export const Footer = async () => {
                     <li key={link.id} className="mt-4">
                       <Link
                         href={link.href ?? '/'}
-                        className="transition hover:text-blue-800"
+                        className="transition hover:text-secondary"
                       >
                         {link.label}
                       </Link>

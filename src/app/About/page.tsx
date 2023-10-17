@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   AcademicCapIcon,
-  CheckCircleIcon,
   HandRaisedIcon,
   RocketLaunchIcon,
   SparklesIcon,
@@ -106,7 +105,7 @@ const About = () => {
             <div key={value.name} className="relative pl-9">
               <dt className="inline font-semibold text-gray-900">
                 <value.icon
-                  className="absolute left-1 top-1 h-5 w-5 text-indigo-500"
+                  className="absolute left-1 top-1 h-5 w-5 text-primary"
                   aria-hidden="true"
                 />
                 {value.name}

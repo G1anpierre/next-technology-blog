@@ -11,11 +11,27 @@ const query = gql`
       data {
         id
         attributes {
+          name
+          subtitle
+          description
+          image {
+            data {
+              attributes {
+                size
+                name
+                caption
+                height
+                width
+                url
+              }
+            }
+          }
           posts {
             data {
               id
               attributes {
                 title
+                date
                 author
                 image {
                   data {
@@ -60,7 +76,7 @@ const Categories = async ({params}: {params: {categorySlug: string}}) => {
       },
     },
     variables: {
-      categorySlug: params.categorySlug,
+      categorySlug: `${decodeURI(params.categorySlug)}`,
     },
   })
 
@@ -68,14 +84,17 @@ const Categories = async ({params}: {params: {categorySlug: string}}) => {
     data.categories.data[0]?.attributes.posts.data,
   )
 
+  const validatedCategoryAttributes = data.categories.data[0]?.attributes
+
   if (!validatedCategoriesPosts.success) {
     console.log('error on Categories: ', validatedCategoriesPosts.error)
   }
 
   const info = {
-    title: 'Categories',
-    description:
-      'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.',
+    title: validatedCategoryAttributes.name.toUpperCase(),
+    subtitle: validatedCategoryAttributes.subtitle,
+    description: validatedCategoryAttributes.description,
+    image: validatedCategoryAttributes.image,
   }
 
   return (

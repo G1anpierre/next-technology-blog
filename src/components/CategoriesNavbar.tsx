@@ -43,21 +43,21 @@ export const CategoriesNavbar = async ({
   }
 
   return (
-    <ul className="py-8 container mx-auto p-2 flex flex-wrap gap-5 border-b-4 border-indigo-500">
+    <ul className="py-8 container mx-auto p-2 flex flex-wrap gap-5 border-b-4 border-primary">
       {validatedCategories.data.map(element => (
-        <li
-          key={element.id}
-          className={classNames(
-            'px-4 py-2 border-neutral-950 rounded-full border-2 hover:border-indigo-600 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110',
-            {
-              'border-blue-500': categorySlug === element.attributes.name,
-            },
-          )}
-        >
-          <Link href={`/categories/${element.attributes.name}`}>
+        <Link href={`/categories/${element.attributes.name}`} key={element.id}>
+          <li
+            className={classNames(
+              'px-4 py-2 text-white rounded-full border-2 bg-primary hover:bg-accent transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:text-white',
+              {
+                'bg-secondary text-white':
+                  categorySlug === element.attributes.name,
+              },
+            )}
+          >
             {element.attributes.name.toUpperCase()}
-          </Link>
-        </li>
+          </li>
+        </Link>
       ))}
     </ul>
   )

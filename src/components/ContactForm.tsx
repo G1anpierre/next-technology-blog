@@ -6,6 +6,7 @@ import {SendEmailSchema} from '@/types'
 import classNames from 'classnames'
 import {toast} from 'react-toastify'
 import {sendeEmailToServer} from '@/utils/api'
+import {Button} from './Button'
 
 export const ContactForm = () => {
   const formik = useFormik({
@@ -198,13 +199,7 @@ export const ContactForm = () => {
         </div>
       </div>
       <div className="mt-10 flex justify-end border-t border-gray-900/10 pt-8">
-        <button
-          type="submit"
-          className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75"
-          disabled={formik.isSubmitting || !formik.isValid}
-        >
-          Send message
-        </button>
+        <Button />
       </div>
     </form>
   )

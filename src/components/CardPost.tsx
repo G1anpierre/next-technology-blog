@@ -2,9 +2,10 @@ import React from 'react'
 import Image from 'next/image'
 import {AttributesType} from '@/types'
 import Link from 'next/link'
+import {formatDates} from '@/utils/date'
 
 export const CardPost = ({
-  attributes: {title, author, slug, subtitle, categories, image},
+  attributes: {title, author, slug, subtitle, categories, image, date},
   id,
 }: AttributesType) => {
   return (
@@ -22,22 +23,27 @@ export const CardPost = ({
         <div>
           <div>
             {categories.data.map(({attributes}) => (
-              <h2
+              <Link
+                href={`/categories/${attributes.name}`}
                 key={attributes.name}
-                className="uppercase text-indigo-500 font-medium"
               >
-                {attributes.name}
-              </h2>
+                <h2 className="uppercase text-primary font-medium hover:text-secondary">
+                  {attributes.name}
+                </h2>
+              </Link>
             ))}
-            <h3 className="font-bold underline underline-offset-4 decoration-indigo-500 decoration-2 mb-3">
+            <h3 className="font-bold underline underline-offset-4 decoration-secondary decoration-2 mb-3">
               {title}
             </h3>
             <Link href={`/blog/${slug}/${id}`}>
-              <p className="font-semibold hover:underline hover:underline-offset-4 hover:decoration-indigo-500 text-ellipsis">
+              <p className="font-semibold hover:underline hover:decoration-2 hover:underline-offset-4 hover:decoration-secondary text-ellipsis">
                 {subtitle}
               </p>
             </Link>
-            <sub className="text-gray-500">Author: {author}</sub>
+            <div className="flex justify-between items-center w-full">
+              <sub className="text-gray-500">Author: {author}</sub>
+              <span className="text-xs text-gray-500">{formatDates(date)}</span>
+            </div>
           </div>
         </div>
       </div>

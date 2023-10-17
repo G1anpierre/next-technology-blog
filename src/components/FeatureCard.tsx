@@ -4,7 +4,8 @@ import {AttributesType} from '@/types'
 import Link from 'next/link'
 
 export const FeatureCard = ({
-  attributes: {subtitle, categories, image},
+  attributes: {subtitle, categories, image, slug},
+  id,
 }: AttributesType) => {
   return (
     <div className="relative md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-1 xl:row-span-2 xl:col-end-2">
@@ -22,12 +23,16 @@ export const FeatureCard = ({
               <Link
                 href={`/categories/${attributes.name}`}
                 key={attributes.name}
-                className="bg-black border-white border-2 rounded-full py-2 px-4 self-start text-xs uppercase"
+                className="font-semibold bg-primary hover:bg-secondary border-white border-2 rounded-full py-2 px-4 self-start text-xs uppercase"
               >
                 {attributes.name}
               </Link>
             ))}
-            <p className="font-semibold">{subtitle}</p>
+            <Link href={`/blog/${slug}/${id}`}>
+              <p className="hover:underline hover:decoration-2 hover:underline-offset-4 hover:decoration-secondary text-ellipsis">
+                {subtitle}
+              </p>
+            </Link>
           </div>
         </div>
       </div>

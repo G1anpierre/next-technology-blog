@@ -72,12 +72,12 @@ export const Header = async () => {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12 bg-black px-4 py-2 rounded-full ">
+        <div className="hidden lg:flex lg:gap-x-12 bg-primary px-4 py-2 rounded-full ">
           {tabs.map(item => (
             <Link
               key={item.label}
               href={item.href}
-              className="text-sm font-semibold leading-6 text-white hover:text-indigo-500"
+              className="text-sm font-semibold leading-6 text-white hover:text-secondary"
             >
               {item.label}
             </Link>

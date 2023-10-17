@@ -27,6 +27,7 @@ const ImageSchema = z.object({
 
 export const PostSchema = z.object({
   title: z.string(),
+  date: z.string(),
   author: z.string(),
   slug: z.string(),
   subtitle: z.string(),

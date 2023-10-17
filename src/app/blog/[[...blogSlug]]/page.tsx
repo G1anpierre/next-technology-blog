@@ -11,6 +11,7 @@ const query = gql`
         id
         attributes {
           title
+          date
           author
           image {
             data {
@@ -25,6 +26,7 @@ const query = gql`
             }
           }
           body
+          subtitle
         }
       }
     }
@@ -47,15 +49,9 @@ const Blog = async ({params}: {params: any}) => {
     },
   })
 
-  const info = {
-    title: 'Blog',
-    description:
-      'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.',
-  }
-
   return (
     <div>
-      <Banner info={info} />
+      <Banner info={{...data.post.data.attributes}} />
       <BlogContent {...data.post.data.attributes} />
     </div>
   )

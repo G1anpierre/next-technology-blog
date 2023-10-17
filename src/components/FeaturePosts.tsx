@@ -11,6 +11,7 @@ const query = gql`
         id
         attributes {
           title
+          date
           author
           image {
             data {
