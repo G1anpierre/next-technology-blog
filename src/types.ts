@@ -41,11 +41,13 @@ const Attributes = z.object({
   id: z.string(),
 })
 
-export const LinkSchema = z.object({
-  id: z.string().optional(),
-  label: z.string(),
-  href: z.string(),
-})
+export const LinkSchema = z
+  .object({
+    id: z.string().optional(),
+    label: z.string(),
+    href: z.string(),
+  })
+  .optional()
 
 export const HeaderSchema = z.object({
   tabs: z.array(LinkSchema),
@@ -60,11 +62,26 @@ export const HeroSchema = z.object({
   image: ImageSchema,
 })
 
+export const IntroSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+})
+
+export const ValuesSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  valuesList: z.array(
+    z.object({
+      id: z.string(),
+      title: z.string(),
+      description: z.string().optional(),
+      icon: z.string(),
+    }),
+  ),
+})
+
 export const FooterSchema = z.object({
-  newsletter: z.object({
-    title: z.string(),
-    description: z.string(),
-  }),
+  newsletter: IntroSchema,
   sections: z.array(
     z.object({
       id: z.string(),
