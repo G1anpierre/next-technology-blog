@@ -15,15 +15,13 @@ const Contact = () => {
         <div className="px-6 lg:px-8">
           <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900">
-              {`Let's work together!`}
+              Lets work together
             </h2>
             <p className="mt-2 text-lg leading-8 text-gray-600">
-              {`
-              We're passionate about helping businesses of all sizes succeed in
-              the digital age. Whether you're looking to develop a new software
+              We are passionate about helping businesses of all sizes succeed in
+              the digital age. Whether you are looking to develop a new software
               product, improve your existing technology infrastructure, or
-              simply get some expert advice, we're here to help.
-              `}
+              simply get some expert advice, we are here to help.
             </p>
             <ContactForm />
           </div>
