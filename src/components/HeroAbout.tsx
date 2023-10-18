@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import {getClient} from '@/lib/client'
 import {gql} from '@apollo/client'
-import {HeroSchema} from '@/types'
+import {HeroAboutSchema, HeroSchema} from '@/types'
 
 const query = gql`
   query {
@@ -40,7 +40,9 @@ export const HeroAbout = async () => {
     },
   })
 
-  const validatedHero = HeroSchema.safeParse(data.about.data.attributes.hero)
+  const validatedHero = HeroAboutSchema.safeParse(
+    data.about.data.attributes.hero,
+  )
 
   if (!validatedHero.success) {
     console.log('error :', validatedHero.error)

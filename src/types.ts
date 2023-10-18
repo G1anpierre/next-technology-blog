@@ -41,13 +41,11 @@ const Attributes = z.object({
   id: z.string(),
 })
 
-export const LinkSchema = z
-  .object({
-    id: z.string().optional(),
-    label: z.string(),
-    href: z.string(),
-  })
-  .optional()
+export const LinkSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  href: z.string(),
+})
 
 export const HeaderSchema = z.object({
   tabs: z.array(LinkSchema),
@@ -59,6 +57,12 @@ export const HeroSchema = z.object({
   title: z.string(),
   description: z.string(),
   button: LinkSchema,
+  image: ImageSchema,
+})
+
+export const HeroAboutSchema = z.object({
+  title: z.string(),
+  description: z.string(),
   image: ImageSchema,
 })
 

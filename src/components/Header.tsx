@@ -13,6 +13,7 @@ const query = gql`
         attributes {
           header {
             tabs {
+              id
               label
               href
             }
@@ -39,7 +40,8 @@ export const Header = async () => {
   )
 
   if (!validatedHeader.success) {
-    throw new Error('Failed to fetch Header')
+    console.log('error :', validatedHeader.error)
+    return null
   }
 
   const {tabs} = validatedHeader.data

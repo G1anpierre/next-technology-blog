@@ -13,6 +13,7 @@ const query = gql`
             title
             description
             button {
+              id
               label
               href
             }
@@ -47,7 +48,8 @@ export const Hero = async () => {
   const validatedHero = HeroSchema.safeParse(data.homepage.data.attributes.hero)
 
   if (!validatedHero.success) {
-    throw new Error('Failed to fetch Hero')
+    console.log('error :', validatedHero.error)
+    return null
   }
 
   const {title, image, description, button} = validatedHero.data
