@@ -1,7 +1,7 @@
 import {ContactForm} from '@/components/ContactForm'
 import React from 'react'
 
-const Contact = () => {
+export default function Contact() {
   return (
     <div className="relative bg-white">
       <div className="lg:absolute lg:inset-0 lg:left-1/2">
@@ -30,5 +30,3 @@ const Contact = () => {
     </div>
   )
 }
-
-export default Contact
