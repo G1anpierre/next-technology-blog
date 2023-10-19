@@ -1,7 +1,12 @@
 import {ContactForm} from '@/components/ContactForm'
 import React from 'react'
 
-export default function Contact() {
+export const metadata = {
+  title: 'Contact',
+  description: 'Contact us',
+}
+
+export default async function Contact() {
   return (
     <div className="relative bg-white">
       <div className="lg:absolute lg:inset-0 lg:left-1/2">

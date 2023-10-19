@@ -2,7 +2,12 @@ import React from 'react'
 import {HeroAbout} from '@/components/HeroAbout'
 import {HeroValues} from '@/components/HeroValues'
 
-export default function About() {
+export const metadata = {
+  title: 'About',
+  description: 'About us',
+}
+
+export default async function About() {
   return (
     <>
       <HeroAbout />
