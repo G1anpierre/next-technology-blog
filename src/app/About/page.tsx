@@ -7,7 +7,7 @@ export const metadata = {
   description: 'About us',
 }
 
-export default async function About() {
+export default async function Page() {
   return (
     <>
       <HeroAbout />

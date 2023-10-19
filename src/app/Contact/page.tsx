@@ -7,7 +7,7 @@ export const metadata = {
   description: 'Contact us',
 }
 
-export default async function Contact() {
+export default async function Page() {
   return (
     <div className="relative bg-white">
       <div className="lg:absolute lg:inset-0 lg:left-1/2">
